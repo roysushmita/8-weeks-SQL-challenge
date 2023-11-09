@@ -1,6 +1,6 @@
 # 8-weeks-SQL-challenge
 
-Welcome to my 8-Week SQL Challenge repository! Here, you'll find my solutions to the engaging SQL case studies from the [Danny's data](https://8weeksqlchallenge.com/).
+Welcome to my 8-Week SQL Challenge repository! Here, you'll find my solutions to the engaging SQL case studies from the [DATAWITHDANNY](https://8weeksqlchallenge.com/).
 
 Feel free to delve into the challenges, and let's connect on [LinkedIn](https://www.linkedin.com/in/sushmita-roy-341abb267/) for discussions or questions!
 
