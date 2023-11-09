@@ -71,6 +71,8 @@ FULL OUTER JOIN members mm ON mm.customer_id = s.customer_id
 WHERE order_date >= join_date AND order_date < '2021-01-31'
 GROUP BY mm.customer_id; 
 
+
+---Bonus Questions
 /*
 Recreate the following table output using the available data:
 
