@@ -1,9 +1,7 @@
-## Data Exploration
-Check out the queries [Here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20exploration-CS5.sql)
-
 
 ### 1. Data Cleaning Steps
 In a single query, perform the following operations and generate a new table in the data_mart schema named clean_weekly_sales:
+
 •Convert the week_date to a DATE format
 
 •Add a week_number as the second column for each week_date value, for example any value from the 1st of January to 7th of January will be 1, 8th to 14th will be 2 etc
@@ -25,7 +23,7 @@ In a single query, perform the following operations and generate a new table in 
 •Ensure all null string values with an "unknown" string value in the original segment column as well as the new age_band and demographic columns
 
 •Generate a new avg_transaction column as the sales value divided by transactions rounded to 2 decimal places for each record
-
+Check the Data cleaning [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20cleaning-CS5.sql)
 --Creating table:
 ```
 CREATE TABLE clean_weekly_sales(
@@ -87,6 +85,8 @@ SELECT * FROM clean_weekly_sales
 ##
 
 ### 2. Data Exploration
+Check Data exploration [Here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20exploration-CS5.sql)
+
 --1. What day of the week is used for each week_date value?
 ```
 SELECT DISTINCT(to_char(week_date,'day'))
@@ -371,6 +371,8 @@ Using this analysis approach - answer the following questions:
 1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
 2. What about the entire 12 weeks before and after?
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
+
+Check out the Before & After Analysis [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Before%20after%20analysis-CS5.sql)
    
 ```
 SELECT DISTINCT(DATE_PART('week',week_date)) as week_number
@@ -460,7 +462,7 @@ demographic
 customer_type
 Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
-
+Check out the Bonus Questions [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Bonusqn-CS5.sql)
 --Impact on region
 ```
 WITH temp_cte AS (SELECT region,
