@@ -70,18 +70,19 @@ FROM weekly_sales;
 ```
 SELECT * FROM clean_weekly_sales
 ```
-| week_date   | week_number | month_number | calendar_year | region  | platform | segment | age_band      | demographic | customer_type | transactions | sales      | avg_transaction |
-|-------------|-------------|--------------|----------------|---------|----------|---------|---------------|-------------|----------------|--------------|------------|------------------|
-| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | C3      | Retirees       | Couples     | New            | 120,631      | 3,656,163  | 30               |
-| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | F1      | Young Adults   | Families    | New            | 31,574       | 996,575    | 31               |
-| 2020-08-31  | 36          | 8            | 2020           | USA     | Retail   | unknown | unknown        | unknown     | Guest          | 529,151      | 16,509,610 | 31               |
-| 2020-08-31  | 36          | 8            | 2020           | EUROPE  | Retail   | C1      | Young Adults   | Couples     | New            | 4,517        | 141,942    | 31               |
-| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C2      | Middle Aged    | Couples     | New            | 58,046       | 1,758,388  | 30               |
-| 2020-08-31  | 36          | 8            | 2020           | CANADA  | Shopify  | F2      | Middle Aged    | Families    | Existing       | 1,336        | 243,878    | 182              |
-| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F3      | Retirees       | Families    | Existing       | 2,514        | 519,502    | 206              |
-| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Shopify  | F1      | Young Adults   | Families    | Existing       | 2,158        | 371,417    | 172              |
-| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F2      | Middle Aged    | Families    | New            | 318          | 49,557     | 155              |
-| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C3      | Retirees       | Couples     | New            | 111,032      | 3,888,162  | 35               |
+| week_date   | week_number | month_number | calendar_year | region  | platform | segment | age_band      | demographic | customer_type | transactions | sales    | avg_transaction |
+|-------------|-------------|--------------|----------------|---------|----------|---------|---------------|-------------|----------------|--------------|----------|------------------|
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | C3      | Retirees       | Couples     | New            | 120631       | 3656163  | 30               |
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | F1      | Young Adults   | Families    | New            | 31574        | 996575   | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | USA     | Retail   | unknown | unknown        | unknown     | Guest          | 529151       | 16509610 | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | EUROPE  | Retail   | C1      | Young Adults   | Couples     | New            | 4517         | 141942   | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C2      | Middle Aged    | Couples     | New            | 58046        | 1758388  | 30               |
+| 2020-08-31  | 36          | 8            | 2020           | CANADA  | Shopify  | F2      | Middle Aged    | Families    | Existing       | 1336         | 243878   | 182              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F3      | Retirees       | Families    | Existing       | 2514         | 519502   | 206              |
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Shopify  | F1      | Young Adults   | Families    | Existing       | 2158         | 371417   | 172              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F2      | Middle Aged    | Families    | New            | 318          | 49557    | 155              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C3      | Retirees       | Couples     | New            | 111032       | 3888162  | 35               |
+
 
 ##
 
@@ -145,9 +146,9 @@ GROUP BY calendar_year;
 ```
 | calendar_year | total_transaction       |
 |------|-------------|
-| 2018 | 346,406,460 |
-| 2019 | 365,639,285 |
-| 2020 | 375,813,651 |
+| 2018 | 346406460 |
+| 2019 | 365639285 |
+| 2020 | 375813651 |
 
 --4. What is the total sales for each region for each month?
 ```
@@ -189,8 +190,8 @@ GROUP BY platform;
 ```
 | platform  | total_count_transaction |
 |-----------|--------------------------|
-| Shopify   | 5,925,169               |
-| Retail    | 1,081,934,227           |
+| Shopify   | 5925169               |
+| Retail    | 1081934227           |
 
 --6. What is the percentage of sales for Retail vs Shopify for each month
 ```
@@ -331,15 +332,15 @@ WHERE platform = 'Retail'
 GROUP BY age_band,demographic
 ORDER BY retail_contribution DESC;
 ```
-| age_band     | demographic | retail_contribution | contribution_percentage |
+| age_band      | demographic | retail_contribution | contribution_percentage |
 |---------------|--------------|----------------------|--------------------------|
-| unknown       | unknown      | 16,067,285,533      | 40.52                    |
-| Retirees      | Families     | 6,634,686,916       | 16.73                    |
-| Retirees      | Couples      | 6,370,580,014       | 16.07                    |
-| Middle Aged   | Families     | 4,354,091,554       | 10.98                    |
-| Young Adults  | Couples      | 2,602,922,797       | 6.56                     |
-| Middle Aged   | Couples      | 1,854,160,330       | 4.68                     |
-| Young Adults  | Families     | 1,770,889,293       | 4.47                     |
+| unknown       | unknown      | 16067285533         | 40.52                    |
+| Retirees      | Families     | 6634686916          | 16.73                    |
+| Retirees      | Couples      | 6370580014          | 16.07                    |
+| Middle Aged   | Families     | 4354091554          | 10.98                    |
+| Young Adults  | Couples      | 2602922797          | 6.56                     |
+| Middle Aged   | Couples      | 1854160330          | 4.68                     |
+| Young Adults  | Families     | 1770889293          | 4.47                     |
 
 --9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 ```
@@ -395,7 +396,7 @@ FROM temp_cte;
 ```
 | before_change | after_change | sale_change | rate_of_change |
 |---------------|--------------|-------------|----------------|
-| 2,345,878,357 | 2,318,994,169 | -26,884,188 | -1.15          |
+| 2345878357    | 2318994169   | -26884188   | -1.15          |
 
 
 --2. What about the entire 12 weeks before and after?
@@ -412,7 +413,8 @@ FROM temp_cte;
 ```
 | before_change | after_change | sale_change  | rate_of_change |
 |---------------|--------------|--------------|-----------------|
-| 7,126,273,147 | 6,973,947,753 | -152,325,394 | -2.14           |
+| 7126273147    | 6973947753   | -152325394   | -2.14           |
+
 
 --3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 ```
@@ -426,9 +428,9 @@ FROM temp_cte;
 ```
 | calendar_year | before_change | after_change | sale_change  | rate_of_change |
 |---------------|---------------|--------------|--------------|-----------------|
-| 2018          | 2,125,140,809 | 2,129,242,914 | 4,102,105    | 0.19            |
-| 2019          | 2,249,989,796 | 2,252,326,390 | 2,336,594    | 0.10            |
-| 2020          | 2,345,878,357 | 2,318,994,169 | -26,884,188  | -1.15           |
+| 2018          | 2125140809    | 2129242914   | 4102105      | 0.19            |
+| 2019          | 2249989796    | 2252326390   | 2336594      | 0.10            |
+| 2020          | 2345878357    | 2318994169   | -26884188    | -1.15           |
 
 
 ```
@@ -440,8 +442,115 @@ SELECT calendar_year,before_change,after_change,after_change-before_change AS sa
 ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
 FROM temp_cte;
 ```
-| calendar_year | before_change | after_change | sale_change   | rate_of_change |
-|---------------|---------------|--------------|---------------|-----------------|
-| 2018          | 6,396,562,317 | 6,500,818,510 | 104,256,193   | 1.63            |
-| 2019          | 6,883,386,397 | 6,862,646,103 | -20,740,294   | -0.30           |
-| 2020          | 7,126,273,147 | 6,973,947,753 | -152,325,394  | -2.14           |
+| calendar_year | before_change | after_change | sale_change | rate_of_change |
+|---------------|---------------|--------------|-------------|-----------------|
+| 2018          | 6396562317    | 6500818510   | 104256193   | 1.63            |
+| 2019          | 6883386397    | 6862646103   | -20740294   | -0.30           |
+| 2020          | 7126273147    | 6973947753   | -152325394  | -2.14           |
+
+
+
+### 4. Bonus Question
+Which areas of the business have the highest negative impact in sales metrics performance in 2020 for the 12 week before and after period?
+
+region
+platform
+age_band
+demographic
+customer_type
+Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
+
+
+--Impact on region
+```
+WITH temp_cte AS (SELECT region,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36 AND calendar_year=2020) THEN sales END) after_change
+FROM clean_weekly_sales 
+GROUP BY region)
+SELECT region,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte ORDER BY rate_of_change;
+```
+| region         | before_change | after_change  | sale_change   | rate_of_change |
+|----------------|---------------|---------------|---------------|-----------------|
+| ASIA           | 1637244466    | 1583807621    | -53436845     | -3.26           |
+| OCEANIA        | 2354116790    | 2282795690    | -71321100     | -3.03           |
+| SOUTH AMERICA  | 213036207     | 208452033     | -4584174      | -2.15           |
+| CANADA         | 426438454     | 418264441     | -8174013      | -1.92           |
+| USA            | 677013558     | 666198715     | -10814843     | -1.60           |
+| AFRICA         | 1709537105    | 1700390294    | -9146811      | -0.54           |
+| EUROPE         | 108886567     | 114038959     | 5152392       | 4.73            |
+
+--Impact on platform
+```
+WITH temp_cte AS (SELECT platform,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36 AND calendar_year=2020) THEN sales END) after_change
+FROM clean_weekly_sales 
+GROUP BY platform)
+SELECT platform,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte ORDER BY rate_of_change;
+```
+| platform | before_change | after_change  | sale_change  | rate_of_change |
+|----------|---------------|---------------|--------------|-----------------|
+| Retail   | 6906861113    | 6738777279    | -168083834   | -2.43           |
+| Shopify  | 219412034     | 235170474     | 15758440     | 7.18            |
+
+
+--Impact on age_band
+```
+WITH temp_cte AS (SELECT age_band,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36 AND calendar_year=2020) THEN sales END) after_change
+FROM clean_weekly_sales 
+GROUP BY age_band)
+SELECT age_band,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte ORDER BY rate_of_change;
+```
+| age_band      | before_change | after_change | sale_change | rate_of_change |
+|---------------|---------------|--------------|-------------|-----------------|
+| unknown       | 2764354464    | 2671961443   | -92393021   | -3.34           |
+| Middle Aged   | 1164847640    | 1141853348   | -22994292   | -1.97           |
+| Retirees      | 2395264515    | 2365714994   | -29549521   | -1.23           |
+| Young Adults  | 801806528     | 794417968    | -7388560    | -0.92           |
+
+
+
+--Impact on demographic
+```
+WITH temp_cte AS (SELECT demographic,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36 AND calendar_year=2020) THEN sales END) after_change
+FROM clean_weekly_sales 
+GROUP BY demographic)
+SELECT demographic,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte ORDER BY rate_of_change;
+```
+| demographic   | before_change | after_change | sale_change  | rate_of_change |
+|---------------|---------------|--------------|--------------|-----------------|
+| unknown       | 2764354464    | 2671961443   | -92393021    | -3.34           |
+| Families      | 2328329040    | 2286009025   | -42320015    | -1.82           |
+| Couples       | 2033589643    | 2015977285   | -17612358    | -0.87           |
+
+
+
+--Impact on customer_type
+```
+WITH temp_cte AS (SELECT customer_type,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36 AND calendar_year=2020) THEN sales END) after_change
+FROM clean_weekly_sales 
+GROUP BY customer_type)
+SELECT customer_type,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte ORDER BY rate_of_change;
+```
+| customer_type | before_change | after_change  | sale_change   | rate_of_change |
+|---------------|---------------|---------------|---------------|-----------------|
+| Guest         | 2573436301 | 2496233635 | -77202666   | -3.00           |
+| Existing      | 3690116427 | 3606243454 | -83872973   | -2.27           |
+| New           | 862720419   | 871470664   | 8750245     | 1.01            |
