@@ -1,7 +1,91 @@
 ## Data Exploration
 Check out the queries [Here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20exploration-CS5.sql)
 
-## 2. Data Exploration
+
+### 1. Data Cleaning Steps
+In a single query, perform the following operations and generate a new table in the data_mart schema named clean_weekly_sales:
+•Convert the week_date to a DATE format
+
+•Add a week_number as the second column for each week_date value, for example any value from the 1st of January to 7th of January will be 1, 8th to 14th will be 2 etc
+
+•Add a month_number with the calendar month for each week_date value as the 3rd column
+
+•Add a calendar_year column as the 4th column containing either 2018, 2019 or 2020 values
+
+•Add a new column called age_band after the original segment column using the following mapping on the number inside the segment value
+
+![image](https://github.com/roysushmita/8-weeks-SQL-challenge/assets/129031314/6b017e86-bfbe-4925-be98-9166f5dbcc12)
+
+
+•Add a new demographic column using the following mapping for the first letter in the segment values:
+
+![image](https://github.com/roysushmita/8-weeks-SQL-challenge/assets/129031314/4549a55d-59b0-4595-b2e5-d0bcbc4f067e)
+
+
+•Ensure all null string values with an "unknown" string value in the original segment column as well as the new age_band and demographic columns
+
+•Generate a new avg_transaction column as the sales value divided by transactions rounded to 2 decimal places for each record
+
+--Creating table:
+```
+CREATE TABLE clean_weekly_sales(
+	week_date DATE,
+	week_number INTEGER,
+	month_number INTEGER,
+	calendar_year INTEGER,
+	region VARCHAR(15),
+	platform VARCHAR(10),
+	segment VARCHAR(15),
+	age_band VARCHAR(20) not null,
+	demographic VARCHAR(20) not null,
+	customer_type VARCHAR(10),
+	transactions INTEGER,
+	sales INTEGER,
+	avg_transaction float
+)
+```
+--inserting values in the columns of clean_weekly_sales
+
+```
+INSERT INTO clean_weekly_sales(week_date,week_number,month_number, calendar_year,region,platform,segment,
+							  age_band,demographic,customer_type,transactions,sales,avg_transaction)
+SELECT TO_DATE(week_date, 'DD/MM/YY') as week_date,
+	   DATE_PART('week', TO_DATE(week_date, 'DD/MM/YY')) as week_number,
+  	   DATE_PART('month', TO_DATE(week_date, 'DD/MM/YY')) as month_number,
+       DATE_PART('year', TO_DATE(week_date, 'DD/MM/YY')) as calendar_year,
+	   region, platform, 
+	   CASE WHEN segment='null' THEN 'unknown' ELSE segment END AS segment,
+	   CASE WHEN right(segment,1) = '1' THEN 'Young Adults'
+            WHEN right(segment,1) = '2' THEN 'Middle Aged'
+            WHEN right(segment,1) in ('3','4') THEN 'Retirees'
+            ELSE 'unknown' END as age_band,
+	 CASE WHEN left(segment,1) = 'C' THEN 'Couples'
+    	  WHEN left(segment,1) = 'F' THEN 'Families'
+    	  ELSE 'unknown' END as demographic,
+     customer_type,transactions,sales,
+	 ROUND((sales/transactions),2) as avg_transaction
+FROM weekly_sales;
+```
+
+```
+SELECT * FROM clean_weekly_sales
+```
+| week_date   | week_number | month_number | calendar_year | region  | platform | segment | age_band      | demographic | customer_type | transactions | sales      | avg_transaction |
+|-------------|-------------|--------------|----------------|---------|----------|---------|---------------|-------------|----------------|--------------|------------|------------------|
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | C3      | Retirees       | Couples     | New            | 120,631      | 3,656,163  | 30               |
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | F1      | Young Adults   | Families    | New            | 31,574       | 996,575    | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | USA     | Retail   | unknown | unknown        | unknown     | Guest          | 529,151      | 16,509,610 | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | EUROPE  | Retail   | C1      | Young Adults   | Couples     | New            | 4,517        | 141,942    | 31               |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C2      | Middle Aged    | Couples     | New            | 58,046       | 1,758,388  | 30               |
+| 2020-08-31  | 36          | 8            | 2020           | CANADA  | Shopify  | F2      | Middle Aged    | Families    | Existing       | 1,336        | 243,878    | 182              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F3      | Retirees       | Families    | Existing       | 2,514        | 519,502    | 206              |
+| 2020-08-31  | 36          | 8            | 2020           | ASIA    | Shopify  | F1      | Young Adults   | Families    | Existing       | 2,158        | 371,417    | 172              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F2      | Middle Aged    | Families    | New            | 318          | 49,557     | 155              |
+| 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C3      | Retirees       | Couples     | New            | 111,032      | 3,888,162  | 35               |
+
+##
+
+### 2. Data Exploration
 --1. What day of the week is used for each week_date value?
 ```
 SELECT DISTINCT(to_char(week_date,'day'))
