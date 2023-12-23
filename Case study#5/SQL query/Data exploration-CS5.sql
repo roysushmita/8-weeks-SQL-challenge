@@ -67,7 +67,7 @@ WITH temp_cte as (SELECT calendar_year,demographic,
 				 SUM(sales) as yearly_demo_sale
 				 FROM clean_weekly_sales GROUP BY calendar_year,demographic)
 SELECT calendar_year,demographic,
-ROUND(100.0* yearly_demo_sale/ SUM(yearly_demo_sale) OVER(PARTITION BY calendar_year),2)
+ROUND(100.0* yearly_demo_sale/ SUM(yearly_demo_sale) OVER(PARTITION BY calendar_year),2) percentage_sale
 FROM temp_cte ORDER BY calendar_year,demographic;
 
 --8. Which age_band and demographic values contribute the most to Retail sales?
