@@ -1,4 +1,4 @@
-# Danny's Diner SQL Challenge
+# Case study#5 - Danny's Diner 
 
 ## Overview
 Welcome to Week 1 of the 8-Week SQL Challenge! Join me in solving real-world problems for Danny's Diner, a cozy restaurant serving sushi, curry, and ramen.
@@ -10,7 +10,7 @@ Danny needs insights on customer spending, visit frequency, and menu preferences
 Explore three key datasets: sales, menu, and members, provided in the `dannys_diner` schema.
 
 ## SQL Queries
-Answer crucial questions with concise SQL queries. Check the interactive SQL session to dive in!
+Answer crucial questions with concise SQL queries. Check the [solutions](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/case%20study_1/case_Study1(danny's%20dinner).sql) to dive in!
 
 ## Case Study Questions
 1. Total spent per customer.
@@ -24,13 +24,14 @@ Answer crucial questions with concise SQL queries. Check the interactive SQL ses
 9. Points calculation with sushi multiplier.
 10. Points at end of January for customers A and B.
 
-## Bonus Questions
+### Bonus Questions
 1. Join All The Things: Recreate a customer order table.
 2. Rank All The Things: Generate a table ranking customer products.
 
-## How to Use
+### How to Use
 1. Access a SQL environment.
 2. Run provided queries in order.
-3. Connect on LinkedIn https://www.linkedin.com/in/sushmita-roy-341abb267/ for questions or discussions!
+3. Connect on LinkedIn  for questions or discussions!
 
+###
 Happy querying!
