@@ -23,7 +23,9 @@ In a single query, perform the following operations and generate a new table in 
 •Ensure all null string values with an "unknown" string value in the original segment column as well as the new age_band and demographic columns
 
 •Generate a new avg_transaction column as the sales value divided by transactions rounded to 2 decimal places for each record
+
 Check the Data cleaning [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20cleaning-CS5.sql)
+
 --Creating table:
 ```
 CREATE TABLE clean_weekly_sales(
@@ -81,10 +83,11 @@ SELECT * FROM clean_weekly_sales
 | 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F2      | Middle Aged    | Families    | New            | 318          | 49557    | 155              |
 | 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C3      | Retirees       | Couples     | New            | 111032       | 3888162  | 35               |
 
-
+First 10 rows are here.
 ##
 
 ### 2. Data Exploration
+
 Check Data exploration [Here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20exploration-CS5.sql)
 
 --1. What day of the week is used for each week_date value?
@@ -96,6 +99,7 @@ FROM clean_weekly_sales;
 | week_day |
 |----------|
 | Monday   |
+So, the day of the week is used for each week_date value is "Monday".
 
 --2. What range of week numbers are missing from the dataset?
 ```
@@ -138,6 +142,8 @@ WHERE csw.week_number IS NULL;
 | 51          |
 | 52          |
 
+A total of 28 weeks are missing from the dataset.
+
 --3. How many total transactions were there for each year in the dataset?
 ```
 SELECT calendar_year,SUM(transactions) as total_transaction
@@ -149,6 +155,8 @@ GROUP BY calendar_year;
 | 2018 | 346406460 |
 | 2019 | 365639285 |
 | 2020 | 375813651 |
+
+Total transactions for 2018,2019 and 2020 were respectively 346406460,365639285 and 375813651
 
 --4. What is the total sales for each region for each month?
 ```
@@ -182,6 +190,8 @@ ORDER BY region,month_number;
 | CANADA | 9            | 69067959    |
 | EUROPE | 3            | 35337093    |
 
+24 records are added above.
+
 --5. What is the total count of transactions for each platform
 ```
 SELECT platform,SUM(transactions) AS total_count_transaction
@@ -192,6 +202,9 @@ GROUP BY platform;
 |-----------|--------------------------|
 | Shopify   | 5925169               |
 | Retail    | 1081934227           |
+
+Total count of transactions for Retail is 1081934227 and for shopify the number is 5925169.
+From this it can be clearly seen that in retail, the sale is more.
 
 --6. What is the percentage of sales for Retail vs Shopify for each month
 ```
@@ -226,6 +239,9 @@ GROUP BY calendar_year,month_number;
 | 2020          | 6            | 96.80               | 3.20                 |
 | 2020          | 7            | 96.67               | 3.33                 |
 | 2020          | 8            | 96.51               | 3.49                 |
+
+From the above table, it can be clearly seen that for each month in each year the sales are coming from the Retail platfom mostly.
+Though the number of sales increased a little in the year of 2020, but it couldn't dominate the sale from Retail platform.
 
 OR
 
