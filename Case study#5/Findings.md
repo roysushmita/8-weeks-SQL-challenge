@@ -367,7 +367,81 @@ Taking the week_date value of 2020-06-15 as the baseline week where the Data Mar
 We would include all week_date values for 2020-06-15 as the start of the period after the change and the previous week_date values would be before
 
 Using this analysis approach - answer the following questions:
-
 1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
 2. What about the entire 12 weeks before and after?
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
+   
+```
+SELECT DISTINCT(DATE_PART('week',week_date)) as week_number
+FROM clean_weekly_sales
+WHERE week_date = '2020-06-15';
+```
+| week_number |
+|-------------|
+| 25          |
+
+
+--1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
+```
+with temp_cte AS (SELECT
+SUM(CASE WHEN (week_number BETWEEN 21 AND 24)
+THEN sales END) AS before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 28) THEN sales END) AS after_change
+FROM clean_weekly_sales
+WHERE calendar_year = 2020)
+SELECT before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte;
+```
+| before_change | after_change | sale_change | rate_of_change |
+|---------------|--------------|-------------|----------------|
+| 2,345,878,357 | 2,318,994,169 | -26,884,188 | -1.15          |
+
+
+--2. What about the entire 12 weeks before and after?
+```
+with temp_cte AS (SELECT
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24)
+THEN sales END) AS before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36) THEN sales END) AS after_change
+FROM clean_weekly_sales
+WHERE calendar_year = 2020)
+SELECT before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte;
+```
+| before_change | after_change | sale_change  | rate_of_change |
+|---------------|--------------|--------------|-----------------|
+| 7,126,273,147 | 6,973,947,753 | -152,325,394 | -2.14           |
+
+--3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
+```
+WITH temp_cte AS (SELECT calendar_year,
+SUM(CASE WHEN (week_number BETWEEN 21 AND 24) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 28) THEN sales END) after_change
+FROM clean_weekly_sales GROUP BY calendar_year)
+SELECT calendar_year,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte;
+```
+| calendar_year | before_change | after_change | sale_change  | rate_of_change |
+|---------------|---------------|--------------|--------------|-----------------|
+| 2018          | 2,125,140,809 | 2,129,242,914 | 4,102,105    | 0.19            |
+| 2019          | 2,249,989,796 | 2,252,326,390 | 2,336,594    | 0.10            |
+| 2020          | 2,345,878,357 | 2,318,994,169 | -26,884,188  | -1.15           |
+
+
+```
+WITH temp_cte AS (SELECT calendar_year,
+SUM(CASE WHEN (week_number BETWEEN 13 AND 24) THEN sales END) before_change,
+SUM(CASE WHEN (week_number BETWEEN 25 AND 36) THEN sales END) after_change
+FROM clean_weekly_sales GROUP BY calendar_year)
+SELECT calendar_year,before_change,after_change,after_change-before_change AS sale_change,
+ROUND((100.0* (after_change-before_change)/before_change),2) AS rate_of_change
+FROM temp_cte;
+```
+| calendar_year | before_change | after_change | sale_change   | rate_of_change |
+|---------------|---------------|--------------|---------------|-----------------|
+| 2018          | 6,396,562,317 | 6,500,818,510 | 104,256,193   | 1.63            |
+| 2019          | 6,883,386,397 | 6,862,646,103 | -20,740,294   | -0.30           |
+| 2020          | 7,126,273,147 | 6,973,947,753 | -152,325,394  | -2.14           |
