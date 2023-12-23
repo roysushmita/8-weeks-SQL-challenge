@@ -26,6 +26,6 @@ Identified and analyzed areas of the business with the highest negative impact o
 
 #
 
-👉 Explore the [SQL queries]() and [findings]() with me.
+👉 Explore the [SQL queries](https://github.com/roysushmita/8-weeks-SQL-challenge/tree/main/Case%20study%235/SQL%20query) and [findings]() with me.
 
 
