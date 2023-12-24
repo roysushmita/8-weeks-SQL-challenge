@@ -424,6 +424,7 @@ FROM temp_cte;
 |---------------|--------------|-------------|----------------|
 | 2345878357    | 2318994169   | -26884188   | -1.15          |
 
+The sale got reduced after introducing sustainable packaging within 4 weeks. The sale reduced by 1.15% within just 4 weeks.
 
 --2. What about the entire 12 weeks before and after?
 ```
@@ -441,6 +442,7 @@ FROM temp_cte;
 |---------------|--------------|--------------|-----------------|
 | 7126273147    | 6973947753   | -152325394   | -2.14           |
 
+The sale got reduced by 2.14% after introducing sustainable packaging in DataMart within 12 weeks.
 
 --3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 ```
@@ -458,7 +460,7 @@ FROM temp_cte;
 | 2019          | 2249989796    | 2252326390   | 2336594      | 0.10            |
 | 2020          | 2345878357    | 2318994169   | -26884188    | -1.15           |
 
-
+In the years of 2018 and 2019 in the month of july 
 ```
 WITH temp_cte AS (SELECT calendar_year,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24) THEN sales END) before_change,
