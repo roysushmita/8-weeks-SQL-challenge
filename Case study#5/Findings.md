@@ -99,6 +99,7 @@ FROM clean_weekly_sales;
 | week_day |
 |----------|
 | Monday   |
+
 So, the day of the week is used for each week_date value is "Monday".
 
 --2. What range of week numbers are missing from the dataset?
@@ -317,6 +318,8 @@ GROUP BY calendar_year;
 | 2019          | 32.47               | 27.28               | 40.25                |
 | 2020          | 32.73               | 28.72               | 38.55                |
 
+So, it can be seen that over the years unknown category, from demography, is contributing to the sales more. 
+
 OR
 
 ```
@@ -358,6 +361,9 @@ ORDER BY retail_contribution DESC;
 | Middle Aged   | Couples      | 1854160330          | 4.68                     |
 | Young Adults  | Families     | 1770889293          | 4.47                     |
 
+
+From the above table, it can be seen that unknown category in demography and age_band contributes the most to the retail sales.
+
 --9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 ```
 SELECT calendar_year,platform,round(SUM(sales)/SUM(transactions),2) correct_avg_size, 
@@ -373,6 +379,8 @@ GROUP BY calendar_year,platform ORDER BY calendar_year;
 | 2019          | Shopify  | 183.00            | 177.07              |
 | 2020          | Shopify  | 179.00            | 174.40              |
 | 2020          | Retail   | 36.00             | 40.14               |
+
+We can't use the avg_transaction column to find the actual average transaction size. It would be wrong if we do so. Since the avg_transaction column is representing the average dollar amount spent per transaction during a specific week for the given region,platform,segment,age band,demographic and customer type. So, avg_transaction column can't be used to calculate the average transaction size for each year for Retail vs Shopify.
 
 ##
 
