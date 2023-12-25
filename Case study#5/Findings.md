@@ -157,7 +157,7 @@ GROUP BY calendar_year;
 | 2019 | 365639285 |
 | 2020 | 375813651 |
 
-Total transactions for 2018,2019 and 2020 were respectively 346406460,365639285 and 375813651
+Total transactions for 2018 was $346,406,460, followed by $365,639,285 in 2019 and finally $375,813,651 in 2020. This showed consistent growth in transaction numbers over the years.
 
 --4. What is the total sales for each region for each month?
 ```
@@ -204,8 +204,7 @@ GROUP BY platform;
 | Shopify   | 5925169               |
 | Retail    | 1081934227           |
 
-Total count of transactions for Retail is 1081934227 and for shopify the number is 5925169.
-From this it can be clearly seen that in retail, the sale is more.
+Retail is significantly outperforming Shopify by a total transaction count of 1,080,1934,227, where the count for shopify is 5,925,169.
 
 --6. What is the percentage of sales for Retail vs Shopify for each month
 ```
@@ -241,8 +240,7 @@ GROUP BY calendar_year,month_number;
 | 2020          | 7            | 96.67               | 3.33                 |
 | 2020          | 8            | 96.51               | 3.49                 |
 
-From the above table, it can be clearly seen that for each month in each year the sales are coming from the Retail platfom mostly.
-Though the number of sales increased a little in the year of 2020, but it couldn't dominate the sale from Retail platform.
+The analysis of sales percentage for Retail vs. Shopify by month and year demonstrates that Retail consistently dominates the sales share in each period. Although the of sales percentage increased for Shopify slightly in the year of 2020, it still couldn't dominate the Retail's sales percentage.
 
 OR
 
@@ -318,7 +316,7 @@ GROUP BY calendar_year;
 | 2019          | 32.47               | 27.28               | 40.25                |
 | 2020          | 32.73               | 28.72               | 38.55                |
 
-So, it can be seen that over the years unknown category, from demography, is contributing to the sales more. 
+So, it can be seen that over the years "unknown" demography, is contributing most to the sales. 
 
 OR
 
@@ -362,7 +360,7 @@ ORDER BY retail_contribution DESC;
 | Young Adults  | Families     | 1770889293          | 4.47                     |
 
 
-From the above table, it can be seen that unknown category in demography and age_band contributes the most to the retail sales.
+From the above table, it can be seen that "unknown" category in both demography and age_band makes the most signification contribution to the Retail sales.
 
 --9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 ```
@@ -380,7 +378,7 @@ GROUP BY calendar_year,platform ORDER BY calendar_year;
 | 2020          | Shopify  | 179.00            | 174.40              |
 | 2020          | Retail   | 36.00             | 40.14               |
 
-We can't use the avg_transaction column to find the actual average transaction size. It would be wrong if we do so. Since the avg_transaction column is representing the average dollar amount spent per transaction during a specific week for the given region,platform,segment,age band,demographic and customer type. So, avg_transaction column can't be used to calculate the average transaction size for each year for Retail vs Shopify.
+We cannot use the "avg_transaction" column to determine the actual average transaction size, as doing so would yield inaccurate results. The "avg_transaction" column represents the average dollar amount spent per transaction during a specific week for the given region, platform, segment, age band, demographic, and customer type. Consequently, this column cannot be employed to calculate the average transaction size for each year when comparing Retail vs. Shopify.
 
 ##
 
@@ -460,7 +458,8 @@ FROM temp_cte;
 | 2019          | 2249989796    | 2252326390   | 2336594      | 0.10            |
 | 2020          | 2345878357    | 2318994169   | -26884188    | -1.15           |
 
-In the years of 2018 and 2019 in the month of july 
+This analysis indicates that the sustainable packaging changes introduced in June 2020 had a notable impact on sales compared to the same periods in 2018 and 2019. In 2018, sales increased by $4,102,105 (0.19%) compared to the period before and after the packaging change, and in 2019 also, there was a positive sales variance of $2,336,594 (0.10%). However, 2020 experienced a substantial sales decrease with a significant negative variance of $26,884,188 (-1.15%), showing a clear change from the positive patterns in the previous years.
+
 ```
 WITH temp_cte AS (SELECT calendar_year,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24) THEN sales END) before_change,
@@ -476,7 +475,7 @@ FROM temp_cte;
 | 2019          | 6883386397    | 6862646103   | -20740294   | -0.30           |
 | 2020          | 7126273147    | 6973947753   | -152325394  | -2.14           |
 
-
+In the 12 weeks surrounding the sustainable packaging changes in June 2020, sales dynamics shifted. In 2018, a positive change of $104.26M (1.63%) occurred, followed by a slight dip of $20.74M (-0.30%) in 2019. However, 2020 experienced a notable decline with a negative change of $152.33M (-2.14%). This indicates a variance from tradition and highlights a major long-term impact of the sustainability actions put in place.
 
 ### 4. Bonus Question
 Which areas of the business have the highest negative impact in sales metrics performance in 2020 for the 12 week before and after period?
@@ -490,6 +489,7 @@ Do you have any further recommendations for Danny’s team at Data Mart or any i
 
 Check out the Bonus Questions [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Bonusqn-CS5.sql)
 --Impact on region
+
 ```
 WITH temp_cte AS (SELECT region,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
@@ -510,6 +510,8 @@ FROM temp_cte ORDER BY rate_of_change;
 | AFRICA         | 1709537105    | 1700390294    | -9146811      | -0.54           |
 | EUROPE         | 108886567     | 114038959     | 5152392       | 4.73            |
 
+The most negatively impacted region was ASIA(-3.26%) in sales metrics in 2020, followed by OCEANIA(-3.03), SOUTH AMERICA(-2.15). Even other regions except EUROPE experienced decline in sale. This emphasizes the need for region-specific strategies for optimized sales.
+
 --Impact on platform
 ```
 WITH temp_cte AS (SELECT platform,
@@ -526,6 +528,7 @@ FROM temp_cte ORDER BY rate_of_change;
 | Retail   | 6906861113    | 6738777279    | -168083834   | -2.43           |
 | Shopify  | 219412034     | 235170474     | 15758440     | 7.18            |
 
+So, Retail sales took a hit with a decline of 2.43%, while Shopify witnessed a significant positive shift of 7.18%. This highlights the need for distinct strategies for each platform to optimize sales.
 
 --Impact on age_band
 ```
@@ -564,7 +567,7 @@ FROM temp_cte ORDER BY rate_of_change;
 | Families      | 2328329040    | 2286009025   | -42320015    | -1.82           |
 | Couples       | 2033589643    | 2015977285   | -17612358    | -0.87           |
 
-
+The most significant negative impact on sales metrics in 2020 was observed in the "unknown" demographic, with a noticable decline of 3.34%. Surprisingly, even within the "Retail" platform, this demographic contributed the most and experienced the highest decrease after the introduction of the change. This emphasizes the need for targeted strategies in understanding and mitigating this decline.
 
 --Impact on customer_type
 ```
@@ -582,3 +585,5 @@ FROM temp_cte ORDER BY rate_of_change;
 | Guest         | 2573436301 | 2496233635 | -77202666   | -3.00           |
 | Existing      | 3690116427 | 3606243454 | -83872973   | -2.27           |
 | New           | 862720419   | 871470664   | 8750245     | 1.01            |
+
+With a reduction of 3%, the biggest sales decline in 2020 can be seen in the 'Guest' customer_type. In the meantime, a slight increase of 1.01% can be seen among the "New" customers, highlighting the varied impact of sustainable packaging changes across different customer types. 
