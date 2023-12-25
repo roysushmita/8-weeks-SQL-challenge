@@ -91,7 +91,7 @@ First 10 rows are given below.
 
 Check Data exploration [Here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Data%20exploration-CS5.sql)
 
---1. What day of the week is used for each week_date value?
+**1. What day of the week is used for each week_date value?**
 ```
 SELECT DISTINCT(to_char(week_date,'day'))
 AS week_day
@@ -103,7 +103,7 @@ FROM clean_weekly_sales;
 
 So, the day of the week is used for each week_date value is "Monday".
 
---2. What range of week numbers are missing from the dataset?
+**2. What range of week numbers are missing from the dataset?**
 ```
 WITH week_number_cte AS (SELECT GENERATE_SERIES(1,52) AS week_number)
 SELECT DISTINCT cte.week_number
@@ -146,7 +146,7 @@ WHERE csw.week_number IS NULL;
 
 A total of 28 weeks are missing from the dataset.
 
---3. How many total transactions were there for each year in the dataset?
+**3. How many total transactions were there for each year in the dataset?**
 ```
 SELECT calendar_year,SUM(transactions) as total_transaction
 FROM clean_weekly_sales
@@ -160,7 +160,7 @@ GROUP BY calendar_year;
 
 Total transactions for 2018 was $346,406,460, followed by $365,639,285 in 2019 and finally $375,813,651 in 2020. This showed consistent growth in transaction numbers over the years.
 
---4. What is the total sales for each region for each month?
+**4. What is the total sales for each region for each month?**
 ```
 SELECT region,month_number,SUM(sales) AS total_sales
 FROM clean_weekly_sales
@@ -194,7 +194,7 @@ ORDER BY region,month_number;
 
 24 records are added above.
 
---5. What is the total count of transactions for each platform
+**5. What is the total count of transactions for each platform?**
 ```
 SELECT platform,SUM(transactions) AS total_count_transaction
 FROM clean_weekly_sales
@@ -205,9 +205,9 @@ GROUP BY platform;
 | Shopify   | 5925169               |
 | Retail    | 1081934227           |
 
-Retail is significantly outperforming Shopify by a total transaction count of 1,080,1934,227, where the count for shopify is 5,925,169.
+Retail is significantly out performing Shopify by a total transaction count of 1,080,1934,227, where the count for shopify is 5,925,169.
 
---6. What is the percentage of sales for Retail vs Shopify for each month
+**6. What is the percentage of sales for Retail vs Shopify for each month?**
 ```
 WITH transaction_cte AS (SELECT calendar_year,month_number,platform,SUM(sales) AS monthly_plat_sales
 FROM clean_weekly_sales
@@ -243,7 +243,7 @@ GROUP BY calendar_year,month_number;
 
 The analysis of sales percentage for Retail vs. Shopify by month and year demonstrates that Retail consistently dominates the sales share in each period. Although the of sales percentage increased for Shopify slightly in the year of 2020, it still couldn't dominate the Retail's sales percentage.
 
-OR
+*another way*
 
 ```
 WITH temp_cte AS (SELECT calendar_year, month_number, platform,SUM(sales) AS monthly_plat_sales
@@ -296,7 +296,7 @@ FROM temp_cte;
 | 2020          | 8            | Retail   | 96.51            |
 | 2020          | 8            | Shopify  | 3.49             |
 	  
---7. What is the percentage of sales by demographic for each year in the dataset?
+**7. What is the percentage of sales by demographic for each year in the dataset?**
 ```
 WITH transaction_cte AS (SELECT calendar_year, demographic,SUM(sales) AS yearly_demo_sales
 FROM clean_weekly_sales
@@ -319,7 +319,7 @@ GROUP BY calendar_year;
 
 So, it can be seen that over the years "unknown" demography, is contributing most to the sales. 
 
-OR
+*another way*
 
 ```
 WITH temp_cte as (SELECT calendar_year,demographic,
@@ -341,7 +341,7 @@ FROM temp_cte ORDER BY calendar_year,demographic;
 | 2020          | Families    | 32.73            |
 | 2020          | Unknown     | 38.55            |
 
---8. Which age_band and demographic values contribute the most to Retail sales?
+**8. Which age_band and demographic values contribute the most to Retail sales?**
 ```
 SELECT age_band,demographic,SUM(sales) AS retail_contribution,
 ROUND(100.0 * SUM(sales)/SUM(SUM(sales)) OVER(),2) AS contribution_percentage
@@ -363,7 +363,7 @@ ORDER BY retail_contribution DESC;
 
 From the above table, it can be seen that "unknown" category in both demography and age_band makes the most signification contribution to the Retail sales.
 
---9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
+**9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?**
 ```
 SELECT calendar_year,platform,round(SUM(sales)/SUM(transactions),2) correct_avg_size, 
 round(AVG(avg_transaction)::NUMERIC,2) incorrect_avg_size
@@ -407,7 +407,7 @@ WHERE week_date = '2020-06-15';
 | 25          |
 
 
---1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
+**1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?**
 ```
 with temp_cte AS (SELECT
 SUM(CASE WHEN (week_number BETWEEN 21 AND 24)
@@ -425,7 +425,7 @@ FROM temp_cte;
 
 The sale got reduced after introducing sustainable packaging within 4 weeks. The sale reduced by 1.15% within just 4 weeks.
 
---2. What about the entire 12 weeks before and after?
+**2. What about the entire 12 weeks before and after?**
 ```
 with temp_cte AS (SELECT
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24)
@@ -443,7 +443,7 @@ FROM temp_cte;
 
 The sale got reduced by 2.14% after introducing sustainable packaging in DataMart within 12 weeks.
 
---3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
+**3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?**
 ```
 WITH temp_cte AS (SELECT calendar_year,
 SUM(CASE WHEN (week_number BETWEEN 21 AND 24) THEN sales END) before_change,
@@ -489,7 +489,7 @@ customer_type
 Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
 Check out the Bonus Questions [here](https://github.com/roysushmita/8-weeks-SQL-challenge/blob/main/Case%20study%235/SQL%20query/Bonusqn-CS5.sql)
---Impact on region
+**--Impact on region**
 
 ```
 WITH temp_cte AS (SELECT region,
@@ -513,7 +513,7 @@ FROM temp_cte ORDER BY rate_of_change;
 
 The most negatively impacted region was ASIA(-3.26%) in sales metrics in 2020, followed by OCEANIA(-3.03), SOUTH AMERICA(-2.15). Even other regions except EUROPE experienced decline in sale. This emphasizes the need for region-specific strategies for optimized sales.
 
---Impact on platform
+**--Impact on platform**
 ```
 WITH temp_cte AS (SELECT platform,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
@@ -531,7 +531,7 @@ FROM temp_cte ORDER BY rate_of_change;
 
 So, Retail sales took a hit with a decline of 2.43%, while Shopify witnessed a significant positive shift of 7.18%. This highlights the need for distinct strategies for each platform to optimize sales.
 
---Impact on age_band
+**--Impact on age_band**
 ```
 WITH temp_cte AS (SELECT age_band,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
@@ -551,7 +551,7 @@ FROM temp_cte ORDER BY rate_of_change;
 
 
 
---Impact on demographic
+**--Impact on demographic**
 ```
 WITH temp_cte AS (SELECT demographic,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
@@ -570,7 +570,7 @@ FROM temp_cte ORDER BY rate_of_change;
 
 The most significant negative impact on sales metrics in 2020 was observed in the "unknown" demographic, with a noticable decline of 3.34%. Surprisingly, even within the "Retail" platform, this demographic contributed the most and experienced the highest decrease after the introduction of the change. This emphasizes the need for targeted strategies in understanding and mitigating this decline.
 
---Impact on customer_type
+**--Impact on customer_type**
 ```
 WITH temp_cte AS (SELECT customer_type,
 SUM(CASE WHEN (week_number BETWEEN 13 AND 24 AND calendar_year=2020) THEN sales END) before_change,
