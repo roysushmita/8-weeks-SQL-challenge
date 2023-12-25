@@ -70,6 +70,8 @@ FROM weekly_sales;
 ```
 SELECT * FROM clean_weekly_sales
 ```
+First 10 rows are given below.
+
 | week_date   | week_number | month_number | calendar_year | region  | platform | segment | age_band      | demographic | customer_type | transactions | sales    | avg_transaction |
 |-------------|-------------|--------------|----------------|---------|----------|---------|---------------|-------------|----------------|--------------|----------|------------------|
 | 2020-08-31  | 36          | 8            | 2020           | ASIA    | Retail   | C3      | Retirees       | Couples     | New            | 120631       | 3656163  | 30               |
@@ -83,7 +85,6 @@ SELECT * FROM clean_weekly_sales
 | 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Shopify  | F2      | Middle Aged    | Families    | New            | 318          | 49557    | 155              |
 | 2020-08-31  | 36          | 8            | 2020           | AFRICA  | Retail   | C3      | Retirees       | Couples     | New            | 111032       | 3888162  | 35               |
 
-First 10 rows are here.
 ##
 
 ### 2. Data Exploration
