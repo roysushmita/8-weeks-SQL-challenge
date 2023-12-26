@@ -1,5 +1,8 @@
 # Case study#5 - Data Mart Sales Analysis
 
+![image](https://github.com/roysushmita/8-weeks-SQL-challenge/assets/129031314/74c0abcd-62e4-4540-be08-cd2f238c22d5)
+
+
 ## Introduction
 Welcome to Week 5 of the 8-Week SQL Challenge! 🚀 In this case study, Let's dive deep into Data Mart, Danny's latest venture. The mission is to quantify and understand the impact of sustainable packaging changes implemented in June 2020 on sales performance across different business dimensions.
 
