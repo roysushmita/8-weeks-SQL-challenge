@@ -1,4 +1,4 @@
-# Case study#5 - Danny's Diner 
+# Case study#1 - Danny's Diner 
 
 ## Overview
 Welcome to Week 1 of the 8-Week SQL Challenge! Join me in solving real-world problems for Danny's Diner, a cozy restaurant serving sushi, curry, and ramen.
