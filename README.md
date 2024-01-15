@@ -6,8 +6,7 @@ Feel free to delve into the challenges, and let's connect on [LinkedIn](https://
 
 # Table of content
 1. [Case_study1
-](https://github.com/roysushmita/8-weeks-SQL-challenge/tree/main/case%20study_1
-)
+](https://github.com/roysushmita/8-weeks-SQL-challenge/tree/main/case%20study%231)
 
 ![image](https://github.com/roysushmita/8-weeks-SQL-challenge/assets/129031314/b25d9107-63fc-463a-80d8-e5a54b168f33)
 
